@@ -1,7 +1,7 @@
-import Navbar from "../component/Navbar";
+import Navbar from "../../component/Navbar";
 import { Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Footer from '../component/Footer';
+import Footer from '../../component/Footer';
 
 const Page = () => {
 

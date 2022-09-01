@@ -48,7 +48,7 @@ const links = [
             {
                 name: "Category",
                 icon: <CategoryIcon />,
-                id: Category,
+                id: "category",
                 navigate: "/admin/category",
                 role: "ALL"
             }
@@ -123,9 +123,9 @@ const AdminDrawer = ({ open, setOpen }) => {
                 </Typography>
                 <Divider />
                 {
-                    links.map(link => (
+                    links.map((link, index) => (
                         (link.role === "ALL" || link.role === role) && (
-                            <List subheader={<ListSubheader>{link.title}</ListSubheader>}>
+                            <List key={index} subheader={<ListSubheader>{link.title}</ListSubheader>}>
                                 {
                                     link.items.map(ele => (
                                         (ele.role === "ALL" || ele.role === role) && (

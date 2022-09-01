@@ -1,19 +1,19 @@
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Home from './page/Home';
-import Register from './page/Register';
+import Home from './page/user/Home';
+import Register from './page/auth/Register';
 import store from './redux/store';
-import Page from './page/Page';
+import Page from './page/user/Page';
 import { Provider } from 'react-redux'
 import { SnackbarProvider } from 'notistack';
 import { useEffect, useState } from 'react';
-import AdminPage from './page/AdminPage';
-import ViewCustomer from './page/ViewCustomer';
-import AddProduct from './page/AddProduct';
-import AddCustomer from './page/AddCustomer';
-import ProductsView from './page/ProductsView';
-import ViewBrand from './page/ViewBrand';
-import ViewCategory from './page/ViewCategory';
+import AdminPage from './page/admin/AdminPage';
+import ViewCustomer from './page/admin/ViewCustomer';
+import AddProduct from './page/admin/AddProduct';
+import AddCustomer from './page/admin/AddCustomer';
+import ProductsView from './page/admin/ProductsView';
+import ViewBrand from './page/admin/ViewBrand';
+import ViewCategory from './page/admin/ViewCategory';
 
 function App() {
 

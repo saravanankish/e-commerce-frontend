@@ -2,12 +2,12 @@ import { useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { loggout } from '../redux/loginSlice';
-import ProductView from "../component/ProductView";
+import { loggout } from '../../redux/loginSlice';
+import ProductView from "../../component/ProductView";
 import { Grid } from "@mui/material";
-import Cart from "../component/Cart";
-import Navbar from '../component/Navbar';
-import Footer from '../component/Footer';
+import Cart from "../../component/Cart";
+import Navbar from '../../component/Navbar';
+import Footer from '../../component/Footer';
 
 const Home = () => {
     const [searchParam,] = useSearchParams();

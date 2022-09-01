@@ -1,6 +1,6 @@
-import AdminNavbar from "../component/AdminNavbar";
+import AdminNavbar from "../../component/AdminNavbar";
 import { Outlet } from 'react-router-dom';
-import Footer from '../component/Footer';
+import Footer from '../../component/Footer';
 
 const AdminPage = () => {
 

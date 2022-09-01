@@ -2,10 +2,10 @@ import { Button, Container, Grid, TextField, Typography, FormControl, InputLabel
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { validateEmail, validatePassword, validateUsername } from "../util/validations";
+import { validateEmail, validatePassword, validateUsername } from "../../util/validations";
 import axios from "axios";
-import { backendUrl } from "../config";
-import getToken from "../util/tokenGetter";
+import { backendUrl } from "../../config";
+import getToken from "../../util/tokenGetter";
 import { useSnackbar } from "notistack";
 
 const AddCustomer = ({ type, edit }) => {

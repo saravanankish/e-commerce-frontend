@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import background from '../static/shop.jpg';
+import background from '../../static/shop.jpg';
 import {
     Paper,
     Grid,
@@ -11,8 +11,8 @@ import {
 } from "@mui/material";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { backendUrl } from '../config';
-import { validateEmail, validatePassword, validateUsername } from '../util/validations';
+import { backendUrl } from '../../config';
+import { validateEmail, validatePassword, validateUsername } from '../../util/validations';
 import { useSnackbar } from 'notistack';
 
 const Register = () => {

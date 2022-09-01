@@ -10,14 +10,20 @@ import {
     TableCell,
     TableHead,
     TableBody,
-    IconButton
+    IconButton,
+    TablePagination,
+    FormControl,
+    Select,
+    MenuItem,
+    InputLabel,
+    Grid,
 } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import getToken from "../util/tokenGetter";
-import { backendUrl } from "../config";
+import getToken from "../../util/tokenGetter";
+import { backendUrl } from "../../config";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useNavigate } from "react-router-dom";
@@ -29,16 +35,35 @@ const ViewCustomer = () => {
     const [customers, setCustomers] = useState([]);
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
+    const [totalCustomers, setTotalCustomers] = useState(1);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [page, setPage] = useState(0);
+    const [field, setField] = useState("name");
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         getCustomers();
-    }, [])
+    }, [page, rowsPerPage, search, field])
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
 
     const getCustomers = async () => {
-        var token = await getToken()
-        axios.get(`${backendUrl}/user/customer`, { headers: { "Authorization": "Bearer " + token } }).then(res => {
+        var token = await getToken();
+        var url = `${backendUrl}/user/role/customer?limit=${rowsPerPage}&page=${page}`;
+        if (search !== "") {
+            url += `&field=${field}&search=${search}`;
+        }
+        axios.get(url, { headers: { "Authorization": "Bearer " + token } }).then(res => {
             if (res.status === 200) {
-                setCustomers(res.data);
+                setTotalCustomers(res.data.total);
+                setCustomers(res.data.data);
             }
         })
     }
@@ -61,19 +86,40 @@ const ViewCustomer = () => {
                     <Button variant="contained" onClick={() => navigate("/admin/add/customer")}>Add Customer</Button>
                 }
             </div>
-            <TextField
-                sx={{ mt: 1 }}
-                fullWidth
-                label="Search Customer"
-                placeholder="Search"
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <SearchIcon />
-                        </InputAdornment>
-                    ),
-                }}
-            />
+            <Grid container spacing={1} style={{ marginTop: 3 }}>
+                <Grid item md={2} xs={12}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Field</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            label="Field"
+                            value={field}
+                            onChange={(e) => setField(e.target.value)}
+                        >
+                            <MenuItem value="name">Name</MenuItem>
+                            <MenuItem value="email">Email</MenuItem>
+                            <MenuItem value="username">Username</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12} md={10}>
+                    <TextField
+                        fullWidth
+                        label="Search Customer"
+                        placeholder="Search"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <SearchIcon />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                </Grid>
+            </Grid>
             <TableContainer style={{ border: "1px solid #c9c3ad", borderRadius: "5px", marginTop: "5px", marginBottom: "20px", backgroundColor: "white" }} >
                 <Table>
                     <TableHead>
@@ -114,6 +160,16 @@ const ViewCustomer = () => {
                         }
                     </TableBody>
                 </Table>
+                <TablePagination
+                    className="tableContainer"
+                    rowsPerPageOptions={[5, 10, 25]}
+                    component="div"
+                    count={totalCustomers}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
             </TableContainer>
         </Container >
     )

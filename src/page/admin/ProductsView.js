@@ -21,7 +21,7 @@ import { visuallyHidden } from '@mui/utils';
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { backendUrl } from "../config";
+import { backendUrl } from "../../config";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from "react-router-dom";
@@ -175,7 +175,7 @@ const ProductsView = () => {
 
     const fetchProducts = async (limit, page, search) => {
         axios.get(`${backendUrl}/products?limit=${limit}&page=${page}&search=${search || ""}`).then(res => {
-            setProducts(res.data.products);
+            setProducts(res.data.data);
             setTotalProducts(res.data.total);
         }).catch(err => {
             enqueueSnackbar('Unable to fetch products', { variant: 'error' })

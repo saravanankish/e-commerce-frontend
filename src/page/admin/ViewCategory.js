@@ -15,9 +15,9 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SearchIcon from '@mui/icons-material/Search';
-import getToken from "../util/tokenGetter";
+import getToken from "../../util/tokenGetter";
 import axios from "axios";
-import { backendUrl } from "../config";
+import { backendUrl } from "../../config";
 import { useSnackbar } from "notistack";
 
 const ViewCategory = () => {
@@ -30,6 +30,7 @@ const ViewCategory = () => {
 
     useEffect(() => {
         fetchCategories();
+        // eslint-disable-next-line
     }, [])
 
     const fetchCategories = async () => {

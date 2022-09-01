@@ -10,11 +10,11 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { backendUrl } from "../config";
-import getToken from "../util/tokenGetter";
+import { backendUrl } from "../../config";
+import getToken from "../../util/tokenGetter";
 import { useSnackbar } from "notistack";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { validateImageUrl } from "../util/validations";
+import { validateImageUrl } from "../../util/validations";
 
 const AddProduct = ({ type, edit }) => {
 
@@ -41,6 +41,7 @@ const AddProduct = ({ type, edit }) => {
         if (productId) {
             getProductData(productId)
         }
+        // eslint-disable-next-line
     }, [productId])
 
     const handleSubmit = async (e) => {
@@ -115,7 +116,7 @@ const AddProduct = ({ type, edit }) => {
 
     const fetchSubCategories = async () => {
         var token = await getToken();
-        axios.get(`${backendUrl}/category/subcategory`, { headers: { "Authorization": "Bearer " + token } }).then(res => {
+        axios.get(`${backendUrl}/sub-category`, { headers: { "Authorization": "Bearer " + token } }).then(res => {
             if (res.status === 200) {
                 setCategories(res.data);
             }
@@ -127,6 +128,7 @@ const AddProduct = ({ type, edit }) => {
     useEffect(() => {
         fetchBrands()
         fetchSubCategories()
+        // eslint-disable-next-line
     }, [])
 
     return (
@@ -250,7 +252,7 @@ const AddProduct = ({ type, edit }) => {
                                 />
                                 <IconButton
                                     color="error"
-                                    onClick={() => setImages(prev => prev.filter((_, ind) => index != ind))}
+                                    onClick={() => setImages(prev => prev.filter((_, ind) => index !== ind))}
                                     disabled={images.length === 1}
                                 >
                                     <DeleteIcon />

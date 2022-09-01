@@ -21,13 +21,16 @@ const useProductRender = (pageNumber) => {
         }).then(res => {
             if (res.status === 200) {
                 setProducts(prev => {
-                    return [...prev, ...res.data.products]
+                    return [...prev, ...res.data.data]
                 })
-                setHasMore(res.data.products.length > 0)
+                setHasMore(res.data.data.length > 0)
                 setLoading(false)
             }
         }).catch(err => {
-            if (axios.isCancel(err)) return;
+            if (axios.isCancel(err)) {
+                console.log("axios error")
+                return;
+            }
             setErrors(true);
         })
         return () => cancel();
