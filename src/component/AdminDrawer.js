@@ -76,7 +76,7 @@ const links = [
                 name: "Add Brand",
                 icon: <SellIcon />,
                 id: "addBrand",
-                navigate: "/admin/add/brand",
+                navigate: "",
                 role: "ADMIN"
             },
             {
@@ -92,7 +92,7 @@ const links = [
 
 ]
 
-const AdminDrawer = ({ open, setOpen }) => {
+const AdminDrawer = ({ open, setOpen, setOpenAddBrand }) => {
 
     const role = useSelector(state => state.login.role);
     const navigate = useNavigate();
@@ -129,7 +129,13 @@ const AdminDrawer = ({ open, setOpen }) => {
                                 {
                                     link.items.map(ele => (
                                         (ele.role === "ALL" || ele.role === role) && (
-                                            <ListItem key={ele.id} disablePadding onClick={() => navigate(ele.navigate)}>
+                                            <ListItem key={ele.id} disablePadding onClick={() => {
+                                                if (ele.id === "addBrand") {
+                                                    setOpenAddBrand(true)
+                                                } else {
+                                                    navigate(ele.navigate)
+                                                }
+                                            }}>
                                                 <ListItemButton>
                                                     <ListItemIcon>
                                                         {ele.icon}
