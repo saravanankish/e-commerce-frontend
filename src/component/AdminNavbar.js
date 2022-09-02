@@ -10,7 +10,7 @@ import { authUrl } from '../config';
 import AdminDrawer from './AdminDrawer';
 import React, { useState } from 'react';
 
-const AdminNavbar = ({ setOpenAddBrand }) => {
+const AdminNavbar = ({ setOpenAddBrand, setOpenAddCategory }) => {
     const navigate = useNavigate();
     const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -41,7 +41,12 @@ const AdminNavbar = ({ setOpenAddBrand }) => {
                     <LogoutButton variant="contained" color="error" style={{ height: "30px" }} onClick={popup} />
                 </Toolbar>
             </AppBar>
-            <AdminDrawer open={openDrawer} setOpen={setOpenDrawer} setOpenAddBrand={setOpenAddBrand} />
+            <AdminDrawer
+                open={openDrawer}
+                setOpen={setOpenDrawer}
+                setOpenAddCategory={setOpenAddCategory}
+                setOpenAddBrand={setOpenAddBrand}
+            />
         </>
     );
 }

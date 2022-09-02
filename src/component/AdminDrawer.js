@@ -17,7 +17,6 @@ import ControlPointDuplicateIcon from '@mui/icons-material/ControlPointDuplicate
 import SellIcon from '@mui/icons-material/Sell';
 import { ListSubheader } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-import { Category } from '@mui/icons-material';
 
 const links = [
     {
@@ -92,7 +91,7 @@ const links = [
 
 ]
 
-const AdminDrawer = ({ open, setOpen, setOpenAddBrand }) => {
+const AdminDrawer = ({ open, setOpen, setOpenAddBrand, setOpenAddCategory }) => {
 
     const role = useSelector(state => state.login.role);
     const navigate = useNavigate();
@@ -132,6 +131,8 @@ const AdminDrawer = ({ open, setOpen, setOpenAddBrand }) => {
                                             <ListItem key={ele.id} disablePadding onClick={() => {
                                                 if (ele.id === "addBrand") {
                                                     setOpenAddBrand(true)
+                                                } else if (ele.id === "addCategory") {
+                                                    setOpenAddCategory(true)
                                                 } else {
                                                     navigate(ele.navigate)
                                                 }

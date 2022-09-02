@@ -28,6 +28,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
+import format from "date-fns/format";
 
 const ViewCustomer = () => {
 
@@ -43,6 +44,7 @@ const ViewCustomer = () => {
 
     useEffect(() => {
         getCustomers();
+        // eslint-disable-next-line 
     }, [page, rowsPerPage, search, field])
 
     const handleChangePage = (event, newPage) => {
@@ -128,7 +130,7 @@ const ViewCustomer = () => {
                             <TableCell align="center">Name</TableCell>
                             <TableCell align="center">Username</TableCell>
                             <TableCell align="center">Email</TableCell>
-                            <TableCell align="center">Number of Orders</TableCell>
+                            <TableCell align="center">User since</TableCell>
                             {
                                 role === 'ADMIN' &&
                                 <TableCell align="center">Action</TableCell>
@@ -143,7 +145,7 @@ const ViewCustomer = () => {
                                     <TableCell align="center">{customer.name || "-"}</TableCell>
                                     <TableCell align="center">{customer.username}</TableCell>
                                     <TableCell align="center">{customer.email || "-"}</TableCell>
-                                    <TableCell align="center">{customer.orders?.length || 0}</TableCell>
+                                    <TableCell align="center">{format(new Date(customer.creationTime), "dd MMM yyyy")} </TableCell>
                                     {
                                         role === "ADMIN" &&
                                         <TableCell align="center">

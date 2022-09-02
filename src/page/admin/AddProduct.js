@@ -14,7 +14,6 @@ import { backendUrl } from "../../config";
 import getToken from "../../util/tokenGetter";
 import { useSnackbar } from "notistack";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { validateImageUrl } from "../../util/validations";
 
 const AddProduct = ({ type, edit }) => {
 
@@ -31,10 +30,6 @@ const AddProduct = ({ type, edit }) => {
     const [description, setDescription] = useState("");
     const [thumbnail, setThumbnail] = useState("");
     const { productId } = useParams();
-    const [errors, setErrors] = useState({
-        thumbnail: "",
-        images: [""]
-    })
     const navigate = useNavigate();
 
     useEffect(() => {

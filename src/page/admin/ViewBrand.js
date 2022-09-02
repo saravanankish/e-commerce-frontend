@@ -21,7 +21,6 @@ import getToken from "../../util/tokenGetter";
 import { backendUrl } from "../../config";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import AddBrandDialog from "../../component/AddBrandDialog";
 import { format } from "date-fns";
@@ -30,7 +29,6 @@ const ViewBrand = () => {
 
     const role = useSelector(state => state.login.role);
     const [brands, setBrands] = useState([]);
-    const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
     const [totalBrands, setTotalBrands] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -42,6 +40,7 @@ const ViewBrand = () => {
 
     useEffect(() => {
         fetchBrand();
+        // eslint-disable-next-line
     }, [search, refresh])
 
     const fetchBrand = async () => {

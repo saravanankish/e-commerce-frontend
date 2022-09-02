@@ -30,6 +30,7 @@ const AddCustomer = ({ type, edit }) => {
         if (customerId && edit) {
             getCustomerData()
         }
+        // eslint-disable-next-line 
     }, [customerId])
 
     const getCustomerData = async () => {
