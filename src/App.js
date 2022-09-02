@@ -14,6 +14,8 @@ import AddCustomer from './page/admin/AddCustomer';
 import ProductsView from './page/admin/ProductsView';
 import ViewBrand from './page/admin/ViewBrand';
 import ViewCategory from './page/admin/ViewCategory';
+import OrdersView from './page/admin/OrdersView';
+import PlaceOrder from './page/admin/PlaceOrder';
 
 function App() {
 
@@ -55,12 +57,15 @@ function App() {
                 <Route path="/admin" element={<AdminPage />} >
                   <Route path="add">
                     <Route path="product" element={<AddProduct type="Add" />} />
+                    <Route path="order" element={<PlaceOrder type="Place" />} />
                     <Route path="customer" element={<AddCustomer type="Add" />} />
                   </Route>
                   <Route path="edit">
                     <Route path="customer/:customerId" element={<AddCustomer type="Update" edit={true} />} />
+                    <Route path="order/:orderId" element={<PlaceOrder type="Update" edit={true} />} />
                     <Route path="product/:productId" element={<AddProduct type="Update" edit={true} />} />
                   </Route>
+                  <Route path="orders" element={<OrdersView />} />
                   <Route path="customers" element={<ViewCustomer />} />
                   <Route path="products" element={<ProductsView />} />
                   <Route path="brands" element={<ViewBrand />} />

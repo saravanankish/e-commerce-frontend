@@ -15,6 +15,7 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import CategoryIcon from '@mui/icons-material/Category';
 import ControlPointDuplicateIcon from '@mui/icons-material/ControlPointDuplicate';
 import SellIcon from '@mui/icons-material/Sell';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { ListSubheader } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 
@@ -50,6 +51,13 @@ const links = [
                 id: "category",
                 navigate: "/admin/category",
                 role: "ALL"
+            },
+            {
+                name: "Orders",
+                id: "orders",
+                navigate: "/admin/orders",
+                role: "ALL",
+                icon: <LocalShippingIcon />
             }
         ]
     },
@@ -84,6 +92,13 @@ const links = [
                 id: "addCategory",
                 navigate: "/admin/add/category",
                 role: "ADMIN"
+            },
+            {
+                name: "Place Order",
+                icon: <LocalShippingIcon />,
+                id: "addOrder",
+                navigate: "/admin/add/order",
+                role: "ADMIN"
             }
         ]
     },
@@ -105,14 +120,15 @@ const AdminDrawer = ({ open, setOpen, setOpenAddBrand, setOpenAddCategory }) => 
             anchor="left"
             variant="temporary"
             open={open}
+
             onClose={handleDrawerToggle}
             sx={{
                 display: { xs: 'block' },
-                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 250 },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 250, overflowX: "hidden" },
             }}
         >
             <Box
-                sx={{ width: 250 }}
+                sx={{ width: 250, overflowX: "none" }}
                 role="presentation"
                 onClick={handleDrawerToggle}
                 onKeyDown={handleDrawerToggle}

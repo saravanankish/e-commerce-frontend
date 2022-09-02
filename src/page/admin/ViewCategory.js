@@ -15,7 +15,6 @@ import {
     IconButton
 } from "@mui/material";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import getToken from "../../util/tokenGetter";

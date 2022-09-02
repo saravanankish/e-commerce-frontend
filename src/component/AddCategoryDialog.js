@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -111,7 +111,7 @@ const AddCategoryDialog = ({ open, setOpen, edit, data, setRefresh, setData }) =
                     <Grid container spacing={1}>
                         {
                             subcategories.map((_, index) => (
-                                <>
+                                <React.Fragment key={index}>
                                     <Grid item xs={10.5}>
                                         <TextField
                                             sx={{ mb: 1 }}
@@ -138,7 +138,7 @@ const AddCategoryDialog = ({ open, setOpen, edit, data, setRefresh, setData }) =
                                             <DeleteForeverIcon />
                                         </Button>
                                     </Grid>
-                                </>
+                                </React.Fragment>
                             ))
                         }
                     </Grid>

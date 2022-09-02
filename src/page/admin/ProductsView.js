@@ -126,9 +126,7 @@ function EnhancedTableHead(props) {
     );
 }
 EnhancedTableHead.propTypes = {
-    numSelected: PropTypes.number.isRequired,
     onRequestSort: PropTypes.func.isRequired,
-    onSelectAllClick: PropTypes.func.isRequired,
     order: PropTypes.oneOf(['asc', 'desc']).isRequired,
     orderBy: PropTypes.string.isRequired,
     rowCount: PropTypes.number.isRequired,
@@ -142,7 +140,6 @@ const ProductsView = () => {
     const [search, setSearch] = useState("");
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('calories');
-    const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const { enqueueSnackbar } = useSnackbar();
@@ -188,15 +185,6 @@ const ProductsView = () => {
         setOrderBy(property);
     };
 
-    const handleSelectAllClick = (event) => {
-        if (event.target.checked) {
-            const newSelecteds = products.map((n) => n.productId);
-            setSelected(newSelecteds);
-            return;
-        }
-        setSelected([]);
-    };
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -237,10 +225,8 @@ const ProductsView = () => {
                     size='medium'
                 >
                     <EnhancedTableHead
-                        numSelected={selected.length}
                         order={order}
                         orderBy={orderBy}
-                        onSelectAllClick={handleSelectAllClick}
                         onRequestSort={handleRequestSort}
                         rowCount={products.length}
                     />

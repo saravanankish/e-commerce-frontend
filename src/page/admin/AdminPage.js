@@ -18,7 +18,7 @@ const AdminPage = () => {
                 setOpenAddBrand={setOpenAddBrand}
                 setOpenAddCategory={setOpenAddCategory}
             />
-            <div style={{ marginTop: '45px' }}>
+            <div style={{ marginTop: '45px', minHeight: "76vh" }}>
                 <Outlet />
             </div>
             <Footer />

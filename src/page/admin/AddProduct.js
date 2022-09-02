@@ -63,7 +63,7 @@ const AddProduct = ({ type, edit }) => {
                 }
             }).catch(err => {
                 if (err) {
-                    enqueueSnackbar(err, { variant: "error" })
+                    enqueueSnackbar(err.response.data.message, { variant: "error" })
                 }
             })
         } else {
@@ -74,7 +74,7 @@ const AddProduct = ({ type, edit }) => {
                 }
             }).catch(err => {
                 if (err)
-                    enqueueSnackbar(err, { variant: "error" })
+                    enqueueSnackbar(err.response.data.message, { variant: "error" })
             })
         }
     }
@@ -100,7 +100,7 @@ const AddProduct = ({ type, edit }) => {
 
     const fetchBrands = async () => {
         var token = await getToken();
-        axios.get(`${backendUrl}/brand`, { headers: { "Authorization": "Bearer " + token } }).then(res => {
+        axios.get(`${backendUrl}/brand/options`, { headers: { "Authorization": "Bearer " + token } }).then(res => {
             if (res.status === 200) {
                 setBrands(res.data);
             }
