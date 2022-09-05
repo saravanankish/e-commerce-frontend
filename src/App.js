@@ -16,6 +16,7 @@ import ViewBrand from './page/admin/ViewBrand';
 import ViewCategory from './page/admin/ViewCategory';
 import OrdersView from './page/admin/OrdersView';
 import PlaceOrder from './page/admin/PlaceOrder';
+import VerifyEmail from './page/auth/VerifyEmail';
 
 function App() {
 
@@ -27,7 +28,7 @@ function App() {
       setRole(JSON.parse(sessionStorage.getItem("token")).role)
       setLoggedIn(sessionStorage.getItem("token") !== null && sessionStorage.getItem("token") !== undefined)
     } else {
-      if (window.location.href !== "http://127.0.0.1:3000/" && window.location.href !== "http://127.0.0.1:3000/register")
+      if (window.location.href !== "http://127.0.0.1:3000/" && window.location.href !== "http://127.0.0.1:3000/register" && !window.location.href.includes("http://127.0.0.1:3000/verify/mail"))
         window.location.replace("http://127.0.0.1:3000")
     }
     // eslint-disable-next-line
@@ -43,7 +44,10 @@ function App() {
           <Routes>
             {
               (role === "" || role === "CUSTOMER") &&
-              <Route element={<Home />} index />
+              <>
+                <Route element={<Home />} index />
+                <Route path="verify/mail/:token" element={<VerifyEmail />} />
+              </>
             }
             {
               role === "CUSTOMER" || role === "" ?
@@ -73,7 +77,7 @@ function App() {
                 </Route>
             }
             {
-              role &&
+              role && role !== "" &&
               <Route path="*" element={role === "CUSTOMER" || role === "" ? <Navigate to="/" /> : <Navigate to="/admin" />} />
             }
           </Routes>
