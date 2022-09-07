@@ -118,7 +118,7 @@ const OrdersView = () => {
 
     const cancelOrder = async (id) => {
         var token = await getToken();
-        axios.delete(`${backendUrl}/order/cancel/${id}`, { headers: { "Authorization": "Bearer " + token } }).then(res => {
+        axios.post(`${backendUrl}/order/cancel/${id}`, "Cancelled by admin", { headers: { "Authorization": "Bearer " + token, "Content-Type": "text/plain" } }).then(res => {
             if (res.status === 201) {
                 setRefresh(prev => !prev)
                 enqueueSnackbar("Cancelled order successfully", { variant: "success" });
@@ -200,8 +200,8 @@ const OrdersView = () => {
                             }
                             <TableCell align="center">Modified date</TableCell>
                             {
-                                role === "ADMIN" &&
-                                <TableCell align="center">Actions</TableCell>
+                                (role === "ADMIN" && orderStatus !== "CANCELED") &&
+                                < TableCell align="center">Actions</TableCell>
                             }
                         </TableRow>
                     </TableHead>
@@ -226,7 +226,7 @@ const OrdersView = () => {
                                         <TableCell align="center">{format(new Date(order.deliveryDate), "dd MMM yyyy")}</TableCell>
                                     }
                                     {
-                                        orderStatus === "CANCELLED" &&
+                                        orderStatus === "CANCELED" &&
                                         <>
                                             <TableCell align="center">{format(new Date(order.cancelDate), "dd MMM yyyy")}</TableCell>
                                             <TableCell align="center">{order.cancelReason}</TableCell>
@@ -236,20 +236,22 @@ const OrdersView = () => {
                                     {
                                         role === "ADMIN" &&
                                         <TableCell align="center">
-                                            <IconButton
-                                                color="primary"
-                                                onClick={() => {
-                                                    navigate("/admin/edit/order/" + order.orderId)
-                                                }}
-                                            >
-                                                <EditIcon />
-                                            </IconButton>
+                                            {
+                                                (order.orderStatus === "PENDING_PAYMENT" || order.orderStatus === "PLACED") &&
+                                                <IconButton
+                                                    color="primary"
+                                                    onClick={() => {
+                                                        navigate("/admin/edit/order/" + order.orderId)
+                                                    }}
+                                                >
+                                                    <EditIcon />
+                                                </IconButton>
+                                            }
                                             {
                                                 (orderStatus === "PLACED" || orderStatus === 'PENDING_PAYMENT') &&
                                                 <IconButton
                                                     color="error"
-                                                    onClick={() => {
-                                                    }}
+                                                    onClick={() => cancelOrder(order.orderId)}
                                                 >
                                                     <CancelIcon />
                                                 </IconButton>
